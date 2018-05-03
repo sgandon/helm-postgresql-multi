@@ -91,6 +91,7 @@ postgresqlembeddedDependency:
 
 #### RBAC
 For the embedded and osba option you also need to enable specific roles for create and deleting secrets.
+
 Parameter                          | Description	                                    | Default
 -----------------------------------|--------------------------------------------------|--------------------------------
 `serviceAccount.create`            | create a service account for the specific role   | true
