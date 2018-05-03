@@ -1,0 +1,26 @@
+## Default values for postgresql
+## This is a YAML-formatted file
+## Declare variables to be passed into your templates
+
+## ------------------------------------------------------------------------------------------------------ ##
+global:
+  foo: bar
+
+external:
+  enabled: true
+  host: "10.233.10.36"
+  user: talend
+  password: talend123
+  port: "5432"
+  database: dbname
+
+postgresqlembedded: 
+  enabled: false
+
+postgresqlembeddedDependency: 
+  enabled: false
+
+serviceAccount:
+  create: false
+rbac:
+  create: false

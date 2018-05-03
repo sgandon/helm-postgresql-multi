@@ -1,0 +1,17 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  labels: 
+{{ include "tpostgresql.labels" . | indent 4 }}
+  name: {{ include "tpostgresql.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "tpostgresql.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "tpostgresql.serviceAccoundName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end -}}

@@ -1,0 +1,47 @@
+## Default values for postgresql
+## This is a YAML-formatted file
+## Declare variables to be passed into your templates
+
+## ------------------------------------------------------------------------------------------------------ ##
+masterSecretName: postgresql-master-secret
+
+
+external:
+  ##this item is for creating a postgresql secret for accessing a postgres DB outside the cluster
+  enabled: false
+  #These value shall be provided externally
+  #host: 10.233.10.36
+  #user: master-user
+  #password: password123
+  #port: 5432
+
+osba:
+  ##this item is for creating a postgresql secret for accessing a postgres DB provisioned through OSBA
+  enabled: false
+  azure:
+    enabled: false
+    servicePlan: basic50
+    location: westeurope
+    resourceGroup: MC_AzureWorkshop-PrivateCloud-foobar_myK8sCluster_westeurope
+
+##this is required only for enabling the postgesql dependency when this chat is launch directly
+## this value is ignored if infra is added as a dependency from another chart and must be always set at the root chart !
+postgresqlembeddedDependency:
+  enabled: true
+##this item is for setting up posgresql db inside the K8s cluster
+postgresqlembedded: 
+  enabled: true
+  postgresUser: master-user
+  postgresPassword: password123
+  postgresDatabase: dbname
+  persistence:
+    enabled: false
+  service:
+    #the name must reflect the name of the postgres chart or alias used  
+    name: postgresqlembedded
+    port: 5432
+#create rbac to allow jobs to create secrets dynamically.
+serviceAccount:
+  create: true
+rbac:
+  create: true

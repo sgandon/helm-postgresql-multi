@@ -1,0 +1,13 @@
+apiVersion: v1
+name: tpostgresql
+description: A Helm chart for the postgresql in Kubernetes
+version: 0.1.0
+keywords:
+  - Talend
+  - postgresql
+home: https://github.com/sgandon/helm-postgresql-multi
+sources:
+  - https://github.com/sgandon/helm-postgresql-multi
+maintainers:
+  - name: Talend
+    email: sgandon @ talend.com

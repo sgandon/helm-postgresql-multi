@@ -1,0 +1,23 @@
+{{- if .Values.osba.azure.enabled }}
+#https://github.com/Azure/open-service-broker-azure/blob/master/docs/modules/postgresql.md
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: {{ template "infrastructure.fullname" . }}-postgres-azure-instance
+  labels:
+    app: {{ template "infrastructure.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  clusterServiceClassExternalName: azure-postgresql
+  clusterServicePlanExternalName: {{ .Values.osba.azure.servicePlan }}
+  parameters:
+    location: {{ .Values.osba.azure.location }}
+    resourceGroup: {{ .Values.osba.azure.resourceGroup }}
+    sslEnforcement: disabled
+    firewallRules:
+    - startIPAddress: "0.0.0.0"
+      endIPAddress: "255.255.255.255"
+      name: "AllowAll"
+{{- end }}
